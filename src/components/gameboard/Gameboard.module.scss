@@ -1,0 +1,41 @@
+.gameboard {
+    width: 90%;
+    position: relative;
+
+    &__actions {
+        margin-top: 20px;
+
+        >button {
+            width: 100px;
+            height: 50px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+    }
+
+    &__play-area {
+        display: flex;
+        height: 500px;
+        border: 2px solid black;
+
+        &__red,
+        &__blue {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &__red {
+            border-right: 1px solid black;
+            background: #7b1717;
+        }
+
+        &__blue {
+            border-left: 1px solid black;
+            background: #161697;
+        }
+    }
+
+}

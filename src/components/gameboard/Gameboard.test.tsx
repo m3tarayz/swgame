@@ -6,19 +6,19 @@ import { act } from "react-dom/test-utils";
 import { mount, configure } from "enzyme";
 import renderer from "react-test-renderer";
 
-import App from "./App";
-import { getDataInit } from "./redux/actions/data.actions";
+import Gameboard from "./Gameboard";
+import { matchStartInit } from "../../redux/actions/match.actions";
 
 const mockStore = configureStore([]);
 configure({ adapter: new Adapter() });
 
-describe("App", () => {
+describe("Gameboard", () => {
   let store: any;
   let component: React.FC | any;
 
   beforeEach(() => {
     store = mockStore({
-      data: { loading: true }
+      match: { ready: false }
     });
 
     store.dispatch = jest.fn();
@@ -26,7 +26,7 @@ describe("App", () => {
     act(() => {
       component = mount(
         <Provider store={store}>
-          <App />
+          <Gameboard />
         </Provider>
       );
     });
@@ -36,7 +36,7 @@ describe("App", () => {
     const mockComponent = renderer
       .create(
         <Provider store={store}>
-          <App />
+          <Gameboard />
         </Provider>
       )
       .toJSON();
@@ -44,15 +44,26 @@ describe("App", () => {
     expect(mockComponent).toMatchSnapshot();
   });
 
-  it("should call action to get data", () => {
-    expect(store.dispatch).toHaveBeenCalledWith(getDataInit());
+  it("should render 2 card components if match is ready", () => {
+    const store = mockStore({
+      match: {
+        ready: true,
+        red: { data: {} },
+        blue: { data: {} }
+      }
+    });
+
+    const wrapper = mount(
+      <Provider store={store}>
+        <Gameboard />
+      </Provider>
+    );
+
+    expect(wrapper.find("Card")).toHaveLength(2);
   });
 
-  it("should render gameboard component if loading is true", () => {
+  it("should not render any card components if match is not ready", () => {
     const store = mockStore({
-      data: {
-        loading: false
-      },
       match: {
         ready: false
       }
@@ -60,29 +71,18 @@ describe("App", () => {
 
     const wrapper = mount(
       <Provider store={store}>
-        <App />
+        <Gameboard />
       </Provider>
     );
 
-    expect(wrapper.find("Gameboard")).toHaveLength(1);
+    expect(wrapper.find("Card")).toHaveLength(0);
   });
 
-  it("should hide gameboard component if loading is false", () => {
-    const store = mockStore({
-      data: {
-        loading: true
-      },
-      match: {
-        ready: false
-      }
-    });
+  it("should dispatch matchStartInit action on button click", () => {
+    const button = component.find("button");
 
-    const wrapper = mount(
-      <Provider store={store}>
-        <App />
-      </Provider>
-    );
-
-    expect(wrapper.find("Gameboard")).toHaveLength(0);
+    expect(button).toHaveLength(1);
+    button.simulate("click");
+    expect(store.dispatch).toHaveBeenCalledWith(matchStartInit());
   });
 });

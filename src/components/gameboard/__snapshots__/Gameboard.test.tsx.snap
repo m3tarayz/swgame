@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Gameboard should render the component with a redux store 1`] = `
+<div
+  className="gameboard"
+>
+  <div
+    className="gameboard__play-area"
+  >
+    <div
+      className="gameboard__play-area__red"
+    />
+    <div
+      className="gameboard__play-area__blue"
+    />
+  </div>
+  <div
+    className="gameboard__actions"
+  >
+    <button
+      onClick={[Function]}
+    >
+      Begin Battle
+    </button>
+  </div>
+</div>
+`;
