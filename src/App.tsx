@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import "./App.css";
-import Gameboard from "./components/gameboard/Gameboard";
 import { useSelector, useDispatch } from "react-redux";
 
+import "./App.css";
+import Gameboard from "./components/gameboard/Gameboard";
 import { getDataInit } from "./redux/actions/data.actions";
 import { IDataState } from "./model";
 import { IStoreState } from "./redux/reducers";

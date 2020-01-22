@@ -1,11 +1,10 @@
 import React from "react";
-import * as ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 import "./index.css";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
 import { createBrowserHistory } from "history";
-import { Route as Router, Switch } from "react-router";
-import { Route } from "react-router-dom";
+import { Switch, Route } from "react-router";
 
 import * as serviceWorker from "./serviceWorker";
 import configureStore from "./store/configureStore";
@@ -18,12 +17,10 @@ const store = configureStore(history);
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Router>
-        <Switch>
-          <Route path="/" exact component={App} />
-          <Route path="/results" exact component={Results} />
-        </Switch>
-      </Router>
+      <Switch>
+        <Route path="/" exact component={App} />
+        <Route path="/results" exact component={Results} />
+      </Switch>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root") as HTMLElement

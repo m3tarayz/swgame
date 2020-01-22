@@ -1,5 +1,4 @@
 import React from "react";
-import { push } from "connected-react-router";
 import { useSelector, useDispatch } from "react-redux";
 
 import { matchStartInit } from "../../redux/actions/match.actions";
@@ -16,7 +15,6 @@ const Gameboard: React.FC = () => {
     (state: IStoreState) => state.match
   );
 
-
   return (
     <div className={styles[baseClass]}>
       <div className={styles[`${baseClass}__play-area`]}>
@@ -29,10 +27,6 @@ const Gameboard: React.FC = () => {
       </div>
       <div className={styles[`${baseClass}__actions`]}>
         <button onClick={() => dispatch(matchStartInit())}>Begin Battle</button>
-      </div>
-
-      <div className={styles[`${baseClass}__actions`]}>
-        <button onClick={() => dispatch(push("/results"))}>Show Results</button>
       </div>
     </div>
   );
