@@ -6,7 +6,7 @@ import { getData } from "../selectors/data.selector";
 import { ActionTypes, Actions } from "../actions/match.actions";
 import { IPerson, IStarship, IMatchState } from "../../model";
 
-fdescribe("matchEffects", () => {
+describe("matchEffects", () => {
     it("should retrieve data from the store using selector and dispatch error action if there is an error", () => {
         const generator = startMatchSaga();
 
